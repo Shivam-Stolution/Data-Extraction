@@ -7,3 +7,5 @@ response = requests.get(url)
 soup = BeautifulSoup(response.text,"html.parser")
 
 # soup =  BeautifulSoup(resposne.text,"lxml")
+
+soup.find("div",class_ = "XYZ")
