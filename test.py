@@ -9,3 +9,4 @@ soup = BeautifulSoup(response.text,"html.parser")
 # soup =  BeautifulSoup(resposne.text,"lxml")
 
 soup.find("div",class_ = "XYZ")
+soup.find_all('div',{"class":"XYZ"})
