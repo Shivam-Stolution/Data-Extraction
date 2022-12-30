@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-url = "Google.com"
+url = "https://quotes.toscrape.com/"
 
 response = requests.get(url)
 
