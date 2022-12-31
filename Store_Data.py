@@ -8,8 +8,8 @@ def get_store_data(COMBINED_HTML):
     Location =[]
     Phone_number= []
     Summary_of_store = []
-    HOURS = []
-    
+    #HOURS = []
+
     for html in COMBINED_HTML:
     
     # name of the store
