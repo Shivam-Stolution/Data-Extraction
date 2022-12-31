@@ -82,26 +82,3 @@ def getExtractedData(driver, url):
             more_page= False
 
     return list_html
-
-
-    # option= Options()
-    # option.add_argument("-headless")
-    # driver= webdriver.Firefox()
-    # driver.get("https://www.google.com")
-
-    # # Search Query 
-    # Search_Query = "pharmacy in 1008 Newyork"
-
-    # driver.find_element(By.XPATH, '//input[@class="gLFyf"]').send_keys(Search_Query)
-    # driver.find_element(By.XPATH, '//input[@class="gLFyf"]').send_keys(Keys.ENTER)
-    # time.sleep(WAIT_AFTER_ELEMENTS_LOADED)
-    # driver.find_element(By.XPATH, '//a[@class="tiS4rf Q2MMlc"]').click()
-    # time.sleep(WAIT_AFTER_ELEMENTS_LOADED)
-    # LIST_HTML = getExtractedData(driver, driver.current_url)
-
-
-
-
-
-
-    
