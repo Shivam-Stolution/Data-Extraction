@@ -7,10 +7,10 @@ import time, json
 
 STARTUP_DELAY= 5
 NEXT_PAGE_DELAY= 5
-WAIT_AFTER_ELEMENTS_LOADED= 2
-DELAY_TO_CHECK_IF_NEW_ELEMENT_IS_VISIBLE= 1
-LOAD_SPECIFIC_RESULT_DELAY= 4
-BACK_TO_MAIN_LIST_DELAY= 3
+WAIT_AFTER_ELEMENTS_LOADED= 5
+DELAY_TO_CHECK_IF_NEW_ELEMENT_IS_VISIBLE= 5
+LOAD_SPECIFIC_RESULT_DELAY= 5
+BACK_TO_MAIN_LIST_DELAY= 5
 
 def control_browser_and_get_html(base_url,Search_Query):
 
@@ -36,8 +36,11 @@ def getExtractedData(driver, url):
     time.sleep(WAIT_AFTER_ELEMENTS_LOADED)
 
     list_html = []
-    while more_page:
-        
+
+    #while more_page:
+    pages = 3
+    # For-loop instead of While-loop to test the code can be commented out while running.
+    for i in range(0,pages):      
         time.sleep(NEXT_PAGE_DELAY)
 
         html= driver.page_source
@@ -49,12 +52,13 @@ def getExtractedData(driver, url):
         print("Number of Result: {}".format(len(number_of_search)))
 
         for search in number_of_search:
-            print(search.get('id'))
+            #print(search.get('id'))
 
             time.sleep(WAIT_AFTER_ELEMENTS_LOADED)
 
             tab= search.get('id')
 
+            time.sleep(WAIT_AFTER_ELEMENTS_LOADED)
             try:
                 driver.find_element(By.ID, str(tab)).click()
 
@@ -75,10 +79,10 @@ def getExtractedData(driver, url):
 
         next_btn= soup.find('a', attrs={"id": 'pnnext'})
         if next_btn is not None:
-            more_page= True
+            #more_page= True
             driver.find_element(By.ID, 'pnnext').click()
         else:
             print("End of Results")
-            more_page= False
+            #more_page= False
 
     return list_html

@@ -1,3 +1,6 @@
+#import pandas as pd
+import json
+
 def get_store_data(COMBINED_HTML):
 
     Name_of_the_store =[]
@@ -8,7 +11,7 @@ def get_store_data(COMBINED_HTML):
     Location =[]
     Phone_number= []
     Summary_of_store = []
-    #HOURS = []
+    HOURS = []
     
     for html in COMBINED_HTML:
     
@@ -57,18 +60,18 @@ def get_store_data(COMBINED_HTML):
         except AttributeError:
             Phone_number.append('NA')
         # Hours of the store
-#         try:
-#             hours = []
-#             hour_data_L1 = html.find('div',{"jscontroller": "ncqIyf"})
-#             hours_data = hour_data_L1.find('table',class_= "WgFkxc CLtZU")
-#             table_hours = hours_data.find_all('tr')
-#             for days in table_hours:
-#                 hours.append(days.text)
-#             HOURS.append(hours)
+        try:
+            hours = []
+            hour_data_L1 = html.find('div',{"jscontroller": "ncqIyf"})
+            hours_data = hour_data_L1.find('table',class_= "WgFkxc CLtZU")
+            table_hours = hours_data.find_all('tr')
+            for days in table_hours:
+                hours.append(days.text)
+            HOURS.append(hours)
 
-#         except AttributeError:
-#             hours = []
-#             hours.append('NA')
+        except AttributeError:
+            hours = []
+            HOURS.append('NA')
 
         # Review of the store.....
 #         try:
@@ -89,30 +92,32 @@ def get_store_data(COMBINED_HTML):
             Summary_of_store.append('NA')
 
         # Menu offered by the store
-#         try:
-#             Menu_item = html.find('div',class_ = "JZUrec").find_all('div',class_ = "gq9CCd")
-#             #list to store the menu of the store..
-#             Menu_of_store = []
-#             for i in range(0,len(Menu_item)): 
-#                 Menu_of_store.append(Menu_item[i].text)
+        # try:
+        #     Menu_item = html.find('div',class_ = "JZUrec").find_all('div',class_ = "gq9CCd")
+        #     #list to store the menu of the store..
+        #     Menu_of_store = []
+        #     for i in range(0,len(Menu_item)): 
+        #         Menu_of_store.append(Menu_item[i].text)
 
-#         except AttributeError:
-#             Menu_of_store = []
-#             Menu_item= None
+        # except AttributeError:
+        #     Menu_of_store = []
+        #     Menu_item= None
 
         # Store details in dict.
     Store_details = {"Name_of_the_store":Name_of_the_store,
-             "Rating": Rating,
-            "Store_type":Store_type,
-           "Description_store":Description_store,
-                     "Address":Address,
-                     "Location":Location,
-                     "Phone_number":Phone_number,
-# #                      "hours":hours,
-# #                      "Reviews":Reviews,
-#                      "Service_option" : "XX",
-# #                          "Menu_of_store":Menu_of_store,
-#                      "Summary_of_store":Summary_of_store
-           }
-    Data_store = pd.DataFrame(Store_details)
-    return Data_store
+            "Rating": Rating,
+        "Store_type":Store_type,
+        "Description_store":Description_store,
+                    "Address":Address,
+                    "Location":Location,
+                    "Phone_number":Phone_number,
+                      "hours":HOURS,
+                    #  "Reviews":Reviews,
+                    #  "Service_option" : "XX",
+                        # "Menu_of_store":Menu_of_store,
+                     "Summary_of_store":Summary_of_store
+        }
+   #Data_store = pd.DataFrame(Store_details)
+    with open("sample.json", "w") as outfile:
+        json.dump(Store_details, outfile)
+    #Data_JSON = json.dumps(Store_details)
